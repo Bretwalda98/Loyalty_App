@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <meta name="theme-color" content="#0b0d12"/>
+  <title>Redemption QR</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <div class="h1">Redemption QR</div>
+          <div class="small">QR Loyalty MVP • v0.2</div>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn ghost" href="/">Customer</a>
+        <a class="btn ghost" href="/vendor">Vendor</a>
+      </div>
+    </div>
+    
+<div class="card">
+  <div class="row space">
+    <div>
+      <strong id="rTitle">Show this to staff</strong>
+      <div class="small" id="rSub">This QR expires soon.</div>
+    </div>
+    <a class="btn" href="/wallet">Wallet</a>
+  </div>
+
+  <hr/>
+
+  <div class="qrWrap" style="background:rgba(0,0,0,.15)">
+    <div id="qr"></div>
+  </div>
+
+  <div class="qrMeta" style="margin-top:10px">
+    <div>
+      <div class="small">Token</div>
+      <div class="bigCode" id="rt">----</div>
+      <div class="small" id="exp">Expiry: --</div>
+    </div>
+    <div style="min-width:220px">
+      <button class="btn" id="checkBtn" style="width:100%">Check status</button>
+    </div>
+  </div>
+
+  <div class="footerNote" style="margin-top:10px">
+    Staff will scan this QR in the vendor kiosk to approve the reward.
+  </div>
+</div>
+
+  </div>
+  <div id="toast" class="toast"></div>
+  <script type="module" src="/assets/js/redeem.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+</body>
+</html>

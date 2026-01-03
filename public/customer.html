@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <meta name="theme-color" content="#0b0d12"/>
+  <title>Customer Wallet</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <div class="h1">Customer Wallet</div>
+          <div class="small">QR Loyalty MVP • v0.2</div>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn ghost" href="/">Customer</a>
+        <a class="btn ghost" href="/vendor">Vendor</a>
+      </div>
+    </div>
+    
+<div class="grid two">
+  <div class="card">
+    <div class="row space">
+      <div>
+        <strong>Sign in</strong>
+        <div class="small">Google login if configured, otherwise email demo login.</div>
+      </div>
+      <button class="btn" id="logoutBtn">Log out</button>
+    </div>
+
+    <div id="googleBox" style="margin-top:10px; display:none">
+      <div class="small">Google sign-in</div>
+      <div id="gBtn" style="margin-top:8px"></div>
+    </div>
+
+    <hr/>
+
+    <div class="small">Email fallback</div>
+    <label>Email</label>
+    <input class="input" id="email" placeholder="you@gmail.com" inputmode="email" autocomplete="email"/>
+    <div class="row" style="margin-top:10px">
+      <button class="btn primary" id="loginBtn">Continue</button>
+      <button class="btn" id="refreshBtn">Refresh wallet</button>
+    </div>
+
+    <hr/>
+    <div class="footerNote">
+      Tip: scan a vendor QR and it will open the <b>Claim</b> page for that shop automatically.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row space">
+      <strong>Your loyalty accounts</strong>
+      <span class="badge" id="status">Not loaded</span>
+    </div>
+    <div class="list" id="accounts"></div>
+  </div>
+</div>
+
+  </div>
+  <div id="toast" class="toast"></div>
+  <script type="module" src="/assets/js/customer.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+</body>
+</html>

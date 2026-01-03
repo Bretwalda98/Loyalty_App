@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <meta name="theme-color" content="#0b0d12"/>
+  <title>Vendor Kiosk</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <div class="h1">Vendor Kiosk</div>
+          <div class="small">QR Loyalty MVP • v0.2</div>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn ghost" href="/">Customer</a>
+        <a class="btn ghost" href="/vendor">Vendor</a>
+      </div>
+    </div>
+    
+<div class="kiosk">
+  <div class="card">
+    <div class="row space">
+      <div>
+        <strong id="storeName">Store</strong>
+        <div class="small" id="storeMeta">Log in to start issuing QRs</div>
+      </div>
+      <button class="btn" id="vendorLogout">Log out</button>
+    </div>
+
+    <div class="qrWrap" id="qrBox">
+      <div id="qr"></div>
+    </div>
+
+    <div class="qrMeta" style="margin-top:10px">
+      <div>
+        <div class="small">Receipt code (optional)</div>
+        <div class="bigCode" id="receiptCode">----</div>
+        <div class="small" id="expiryText">Expiry: --</div>
+      </div>
+      <div style="min-width: 220px">
+        <button class="btn primary" id="nextSale" style="width:100%; padding:14px 14px; font-size:16px">NEXT SALE</button>
+        <div class="row" style="margin-top:8px">
+          <button class="btn" id="printReceipt" style="flex:1">Print receipt</button>
+          <button class="btn danger" id="voidToken" style="flex:1">Void</button>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+    <div class="row">
+      <label style="margin:0;flex:1">Auto-rotate (touch-minimal)</label>
+      <select id="autoRotate" style="max-width:220px">
+        <option value="0">Off</option>
+        <option value="10">Every 10s</option>
+        <option value="15">Every 15s</option>
+        <option value="30">Every 30s</option>
+        <option value="60">Every 60s</option>
+      </select>
+    </div>
+
+    <hr/>
+    <strong>Redeem validation</strong>
+    <div class="small">Scan customer's redemption QR to approve reward + deduct points.</div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn primary" id="scanRedeem" style="flex:1">Scan redemption QR</button>
+      <input class="input" id="redeemInput" placeholder="Or paste redeem token / URL" style="flex:2"/>
+      <button class="btn" id="approveRedeem">Approve</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <strong>Vendor login</strong>
+    <div class="small">Demo store: <b>morgany-main</b> • PIN: <b>1234</b> (after setup)</div>
+    <label>Store ID</label>
+    <input class="input" id="storeId" value="morgany-main" autocomplete="off"/>
+    <label>PIN</label>
+    <input class="input" id="pin" inputmode="numeric" placeholder="1234" autocomplete="off"/>
+    <div class="row" style="margin-top:10px">
+      <button class="btn primary" id="vendorLogin">Log in</button>
+      <button class="btn" id="loadSettings">Load settings</button>
+    </div>
+
+    <hr/>
+    <strong>Programme settings</strong>
+    <div class="small">Controls token expiry + points rules.</div>
+
+    <label>Points per scan</label>
+    <input class="input" id="pointsPerEarn" type="number" min="1" value="1"/>
+
+    <label>Token expiry (minutes)</label>
+    <input class="input" id="tokenExpiry" type="number" min="5" value="120"/>
+
+    <label>Points expire (days) — leave blank for never</label>
+    <input class="input" id="pointsExpireDays" type="number" min="1" placeholder="e.g. 180"/>
+
+    <label>Max earns per 10 min (0 = unlimited)</label>
+    <input class="input" id="maxEarn10" type="number" min="0" value="0"/>
+
+    <label>Max earns per day (0 = unlimited)</label>
+    <input class="input" id="maxEarnDay" type="number" min="0" value="0"/>
+
+    <div class="row" style="margin-top:10px">
+      <button class="btn primary" id="saveSettings">Save settings</button>
+    </div>
+
+    <hr/>
+    <strong>Add reward</strong>
+    <label>Reward name</label>
+    <input class="input" id="rewardName" placeholder="Free coffee"/>
+    <label>Points cost</label>
+    <input class="input" id="rewardCost" type="number" min="1" value="8"/>
+    <div class="row" style="margin-top:10px">
+      <button class="btn" id="addReward">Add reward</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="scanModal">
+  <div class="modalCard">
+    <div class="row space">
+      <strong>Scan redemption QR</strong>
+      <button class="btn" id="closeScan">Close</button>
+    </div>
+    <div class="small" style="margin:6px 0 10px">Use the tablet/phone camera to scan the customer's QR.</div>
+    <video id="video" autoplay playsinline></video>
+    <div class="footerNote" style="margin-top:10px">
+      If scanning fails, paste the token/URL into the field and press Approve.
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div id="toast" class="toast"></div>
+  <script type="module" src="/assets/js/vendor.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+</body>
+</html>
