@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <meta name="theme-color" content="#0b0d12"/>
+  <title>Shop Details</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <div class="h1">Shop Details</div>
+          <div class="small">QR Loyalty MVP • v0.2</div>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn ghost" href="/">Customer</a>
+        <a class="btn ghost" href="/vendor">Vendor</a>
+      </div>
+    </div>
+    
+<div class="grid two">
+  <div class="card">
+    <div class="row space">
+      <div>
+        <strong id="shopName">Shop</strong>
+        <div class="small" id="shopPolicy">Policy</div>
+      </div>
+      <a class="btn" href="/wallet">Back</a>
+    </div>
+    <hr/>
+    <div class="row space">
+      <div>
+        <div class="small">Your points</div>
+        <div class="bigCode" id="balance">0</div>
+      </div>
+      <button class="btn" id="refreshShop">Refresh</button>
+    </div>
+    <div class="footerNote" style="margin-top:10px">
+      Points are truly expiring lots. Balance shown only includes non-expired points.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row space">
+      <strong>Rewards</strong>
+      <span class="badge" id="rewardStatus">—</span>
+    </div>
+    <div class="list" id="rewards"></div>
+    <div class="footerNote" style="margin-top:10px">
+      Redeem now creates a <b>redemption QR</b>. Staff must scan/approve before points are deducted.
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div id="toast" class="toast"></div>
+  <script type="module" src="/assets/js/shop.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+</body>
+</html>

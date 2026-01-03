@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <meta name="theme-color" content="#0b0d12"/>
+  <title>Receipt (Print)</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <div class="h1">Receipt (Print)</div>
+          <div class="small">QR Loyalty MVP • v0.2</div>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn ghost" href="/">Customer</a>
+        <a class="btn ghost" href="/vendor">Vendor</a>
+      </div>
+    </div>
+    
+<div class="card printCard">
+  <div class="noPrint row space">
+    <div>
+      <strong>Printable receipt</strong>
+      <div class="small">MVP method to include QR on a receipt (without POS integration).</div>
+    </div>
+    <button class="btn primary" onclick="window.print()">Print</button>
+  </div>
+
+  <div class="printWrap">
+    <div style="text-align:center; margin:10px 0 6px;">
+      <div style="font-weight:800; font-size:18px;">Morgany Bakery</div>
+      <div class="small" style="color:#333;">Loyalty Point</div>
+    </div>
+    <div class="qrWrap" style="background:#fff; border:1px solid #ddd; min-height: 260px;">
+      <div id="qr"></div>
+    </div>
+    <div style="text-align:center; margin-top:10px;">
+      <div class="small" style="color:#333;">Receipt code</div>
+      <div class="bigCode" id="code" style="color:#000">----</div>
+      <div class="small" style="color:#333;">Scan to claim</div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div id="toast" class="toast"></div>
+  <script type="module" src="/assets/js/receipt.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+</body>
+</html>
